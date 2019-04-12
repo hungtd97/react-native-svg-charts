@@ -32,7 +32,7 @@ class YAxis extends PureComponent {
 
         const y = scale()
             .domain(domain)
-            .range([ height - bottom, top ])
+            .range([height - bottom, top])
 
         if (scale === d3Scale.scaleBand) {
 
@@ -40,9 +40,9 @@ class YAxis extends PureComponent {
             // same value can occur at several places in dataPoints
             y
                 // set range top to bottom - we are not sorting on values in scaleBand
-                .range([ top, height - bottom ])
-                .paddingInner([ spacingInner ])
-                .paddingOuter([ spacingOuter ])
+                .range([top, height - bottom])
+                .paddingInner([spacingInner])
+                .paddingOuter([spacingOuter])
 
             //add half a bar to center label
             return (value) => y(value) + (y.bandwidth() / 2)
@@ -67,19 +67,19 @@ class YAxis extends PureComponent {
         const { height, width } = this.state
 
         if (data.length === 0) {
-            return <View style={ style } />
+            return <View style={style} />
         }
 
         const values = data.map((item, index) => yAccessor({ item, index }))
 
-        const extent = array.extent([ ...values, min, max ])
+        const extent = array.extent([...values, min, max])
 
         const {
             min = extent[0],
             max = extent[1],
         } = this.props
 
-        const domain = scale === d3Scale.scaleBand ? values : [ min, max ]
+        const domain = scale === d3Scale.scaleBand ? values : [min, max]
 
         //invert range to support svg coordinate system
         const y = this.getY(domain)
@@ -100,14 +100,14 @@ class YAxis extends PureComponent {
         }
 
         return (
-            <View style={ [ style ] }>
+            <View style={[style]}>
                 <View
                     style={{ flexGrow: 1 }}
-                    onLayout={ event => this._onLayout(event) }
+                    onLayout={event => this._onLayout(event)}
                 >
                     {/*invisible text to allow for parent resizing*/}
                     <Text
-                        style={{ opacity: 0, fontSize: svg.fontSize }}
+                        style={{ opacity: 0, opacity: 0, fontSize: svg.fontSize }}
                     >
                         {longestValue}
                     </Text>
@@ -131,13 +131,13 @@ class YAxis extends PureComponent {
                                     ticks.map((value, index) => {
                                         return (
                                             <SVGText
-                                                originY={ y(value) }
-                                                textAnchor={ 'middle' }
-                                                x={ '50%' }
-                                                alignmentBaseline={ 'middle' }
-                                                { ...svg }
-                                                key={ y(value) }
-                                                y={ y(value) }
+                                                originY={y(value)}
+                                                textAnchor={'middle'}
+                                                x={'50%'}
+                                                alignmentBaseline={'middle'}
+                                                {...svg}
+                                                key={y(value)}
+                                                y={y(value)}
                                             >
                                                 {formatLabel(value, index, ticks.length)}
                                             </SVGText>

@@ -35,13 +35,13 @@ class XAxis extends PureComponent {
 
         const x = scale()
             .domain(domain)
-            .range([ left, width - right ])
+            .range([left, width - right])
 
         if (scale === d3Scale.scaleBand) {
 
             x
-                .paddingInner([ spacingInner ])
-                .paddingOuter([ spacingOuter ])
+                .paddingInner([spacingInner])
+                .paddingOuter([spacingOuter])
 
             //add half a bar to center label
             return (value) => x(value) + (x.bandwidth() / 2)
@@ -68,14 +68,14 @@ class XAxis extends PureComponent {
         const { height, width } = this.state
 
         if (data.length === 0) {
-            return <View style={ style } />
+            return <View style={style} />
         }
 
         const values = data.map((item, index) => xAccessor({ item, index }))
         const extent = array.extent(values)
         const domain = scale === d3Scale.scaleBand ?
             values :
-            [ min || extent[0], max || extent[1] ]
+            [min || extent[0], max || extent[1]]
 
         const x = this._getX(domain)
         const ticks = numberOfTicks ? x.ticks(numberOfTicks) : values
@@ -88,13 +88,13 @@ class XAxis extends PureComponent {
         }
 
         return (
-            <View style={ style }>
+            <View style={style}>
                 <View
                     style={{ flexGrow: 1 }}
-                    onLayout={ event => this._onLayout(event) }
+                    onLayout={event => this._onLayout(event)}
                 >
                     {/*invisible text to allow for parent resizing*/}
-                    <Text style={{ opacity: 0, fontSize: svg.fontSize }}>
+                    <Text style={{ opacity: 0, opacity: 0, fontSize: svg.fontSize }}>
                         {formatLabel(ticks[0], 0)}
                     </Text>
                     {
@@ -119,13 +119,13 @@ class XAxis extends PureComponent {
 
                                         return (
                                             <SVGText
-                                                textAnchor={ 'middle' }
-                                                originX={ x(value) }
-                                                alignmentBaseline={ 'hanging' }
-                                                { ...svg }
-                                                { ...valueSvg }
-                                                key={ index }
-                                                x={ x(value) }
+                                                textAnchor={'middle'}
+                                                originX={x(value)}
+                                                alignmentBaseline={'hanging'}
+                                                {...svg}
+                                                {...valueSvg}
+                                                key={index}
+                                                x={x(value)}
                                             >
                                                 {formatLabel(value, index)}
                                             </SVGText>
@@ -153,7 +153,7 @@ XAxis.propTypes = {
         left: PropTypes.number,
         right: PropTypes.number,
     }),
-    scale: PropTypes.oneOf([ d3Scale.scaleTime, d3Scale.scaleLinear, d3Scale.scaleBand ]),
+    scale: PropTypes.oneOf([d3Scale.scaleTime, d3Scale.scaleLinear, d3Scale.scaleBand]),
     numberOfTicks: PropTypes.number,
     xAccessor: PropTypes.func,
     svg: PropTypes.object,
